@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
     <!-- API Settings Tab -->
 <div id="api-settings" class="tab-content active">
     <form method="post" action="options.php">
-        <?php settings_fields('car_shipping_form'); ?>
+      <?php settings_fields('car_shipping_form'); ?>
         <table class="form-table">
             <!-- Google Maps API Key -->
             <tr>

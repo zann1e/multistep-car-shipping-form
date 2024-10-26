@@ -373,19 +373,74 @@ const Step2 = ({ nextStep, prevStep, formData, setFormData }) => {
     };
 
     const manufacturers = [
-        'Acura', 'Audi', 'BMW', 'Buick', 'Cadillac', 'Chevrolet', 'Chrysler', 
-        'Dodge', 'Ford', 'GMC', 'Honda', 'Hyundai', 'Infiniti', 'Jaguar', 
-        'Jeep', 'Kia', 'Lexus', 'Lincoln', 'Mazda', 'Mercedes-Benz', 'Mercury',
-        'Mini', 'Mitsubishi', 'Nissan', 'Porsche', 'Ram', 'Subaru', 'Tesla',
-        'Toyota', 'Volkswagen', 'Volvo'
+        "Acura", "Alfa Romeo", "Audi", "BMW", "Chevrolet", "Ford", "Honda", "Hyundai",
+        "Jeep", "Kia", "Lexus", "Mercedes-Benz", "Nissan", "Porsche", "Ram", "Subaru",
+        "Tesla", "Toyota", "Volkswagen", "Volvo"
     ];
     
     const modelsByManufacturer = {
-        'Toyota': ['Camry', 'Corolla', 'RAV4', 'Highlander', 'Tacoma', 'Tundra', '4Runner', 'Prius'],
-        'Honda': ['Civic', 'Accord', 'CR-V', 'Pilot', 'Odyssey', 'HR-V', 'Ridgeline'],
-        'Ford': ['F-150', 'Mustang', 'Explorer', 'Escape', 'Edge', 'Ranger', 'Bronco'],
-        'Chevrolet': ['Silverado', 'Malibu', 'Equinox', 'Tahoe', 'Camaro', 'Traverse'],
-        'Nissan': ['Altima', 'Rogue', 'Sentra', 'Maxima', 'Pathfinder', 'Frontier'],
+        "Acura": ["ILX", "Integra", "Legend", "MDX", "NSX", "RDX", "RL", "RLX", "RSX", "TL", "TLX", "TSX", "ZDX"],
+        "Alfa Romeo": ["4C", "4C Spider", "Giulia", "Stelvio", "164", "Spider"],
+        "Audi": ["A3", "A4", "A5", "A6", "A7", "A8", "E-Tron", "Q3", "Q4", "Q5", "Q7", "Q8", "R8"],
+        "BMW": [
+            "1-Series", "2-Series", "3-Series", "4-Series", "5-Series", "6-Series", "7-Series", "8-Series",
+            "M2", "M3", "M4", "M5", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "i3", "i4", "i7", "i8", "iX"
+        ],
+        "Chevrolet": [
+            "Blazer", "Bolt", "Camaro", "Colorado", "Corvette", "Cruze", "Equinox", "Impala",
+            "Malibu", "Silverado", "Suburban", "Tahoe", "Traverse"
+        ],
+        "Ford": [
+            "Bronco", "Bronco Sport", "Edge", "Escape", "Expedition", "Explorer", "F-150",
+            "F-250", "F-350", "Lightning", "Maverick", "Mustang", "Ranger", "Transit"
+        ],
+        "Honda": [
+            "Accord", "Civic", "CR-V", "HR-V", "Insight", "Odyssey", "Passport", "Pilot", "Ridgeline"
+        ],
+        "Hyundai": [
+            "Accent", "Elantra", "Ioniq", "Ioniq 5", "Kona", "Palisade", "Santa Cruz",
+            "Santa Fe", "Sonata", "Tucson"
+        ],
+        "Jeep": [
+            "Cherokee", "Compass", "Gladiator", "Grand Cherokee", "Grand Wagoneer",
+            "Renegade", "Wagoneer", "Wrangler"
+        ],
+        "Kia": [
+            "Carnival", "EV6", "Forte", "K5", "Niro", "Rio", "Sedona", "Sorento",
+            "Soul", "Sportage", "Stinger", "Telluride"
+        ],
+        "Lexus": [
+            "ES", "GX", "IS", "LC", "LS", "LX", "NX", "RC", "RX", "UX"
+        ],
+        "Mercedes-Benz": [
+            "A-Class", "C-Class", "E-Class", "G-Class", "GLA-Class", "GLB-Class",
+            "GLC-Class", "GLE-Class", "GLS-Class", "S-Class"
+        ],
+        "Nissan": [
+            "Altima", "Armada", "Frontier", "GT-R", "Kicks", "Leaf", "Maxima",
+            "Murano", "Pathfinder", "Rogue", "Sentra", "Titan", "Versa"
+        ],
+        "Porsche": [
+            "718 Boxster", "718 Cayman", "911", "Cayenne", "Macan", "Panamera", "Taycan"
+        ],
+        "Ram": ["1500", "2500", "3500", "ProMaster", "ProMaster City"],
+        "Subaru": [
+            "Ascent", "BRZ", "Crosstrek", "Forester", "Impreza", "Legacy",
+            "Outback", "Solterra", "WRX"
+        ],
+        "Tesla": ["Model 3", "Model S", "Model X", "Model Y", "Cybertruck"],
+        "Toyota": [
+            "4Runner", "86", "Avalon", "bZ4X", "C-HR", "Camry", "Corolla", "Corolla Cross",
+            "Crown", "GR86", "Highlander", "Prius", "RAV4", "Sequoia", "Sienna",
+            "Tacoma", "Tundra", "Venza"
+        ],
+        "Volkswagen": [
+            "Arteon", "Atlas", "Atlas Cross Sport", "Golf", "GTI", "ID.4",
+            "ID.Buzz", "Jetta", "Taos", "Tiguan"
+        ],
+        "Volvo": [
+            "C40", "S60", "S90", "V60", "V90", "XC40", "XC60", "XC90"
+        ]
         // Add more as needed
     };
 

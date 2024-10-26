@@ -15,7 +15,7 @@ class MultistepCarShippingForm {
     private $style_handle = 'multistep-car-shipping-form-styles';
     private $version;
     private $plugin_path;
-    private $plugin_url;
+    private $plugin_url = 'csf';
 
     // Add error handling function
     private function handle_error($error, $context = '') {
@@ -39,23 +39,10 @@ class MultistepCarShippingForm {
     }
 
     public function __construct() {
-        $this->version = '1.0.' . time();
-        $this->plugin_path = plugin_dir_path(__FILE__);
-        $this->plugin_url = plugin_dir_url(__FILE__);
-
-        // Check requirements before initializing
-        $requirements = $this->check_requirements();
-        if (is_wp_error($requirements)) {
-            add_action('admin_notices', function() use ($requirements) {
-                echo '<div class="error"><p>' . esc_html($requirements->get_error_message()) . '</p></div>';
-            });
-            return;
-        }
-
         // Basic WordPress hooks
         add_action('wp_enqueue_scripts', array($this, 'register_scripts'));
-        add_action('admin_menu', array($this, 'add_admin_menu'));
-        add_action('admin_init', array($this, 'register_settings'));
+			  add_action('admin_init', array($this, 'register_settings'));
+			  add_action('admin_menu', array($this, 'add_admin_menu'));
         add_shortcode('car_shipping_form', array($this, 'render_form'));
 
         // AJAX handlers
@@ -74,7 +61,7 @@ class MultistepCarShippingForm {
             // Register styles
             wp_register_style(
                 $this->style_handle,
-                $this->plugin_url . 'css/styles.css',
+							  plugins_url('css/styles.css', __FILE__),
                 array(),
                 $this->version
             );
@@ -103,7 +90,7 @@ class MultistepCarShippingForm {
             // Register form script
             wp_register_script(
                 $this->script_handle,
-                $this->plugin_url . 'js/form.js',
+							  plugins_url('js/form.js', __FILE__),
                 array('react', 'react-dom'),
                 $this->version,
                 true
@@ -550,24 +537,14 @@ class MultistepCarShippingForm {
     }
     
     public function add_admin_menu() {
-        add_menu_page(
-            'Car Shipping Form',
-            'Car Shipping',
-            'manage_options',
-            'car-shipping-form',
-            array($this, 'render_admin_page'),
-            'dashicons-truck',
-            30
-        );
-
-        add_submenu_page(
-            'car-shipping-form',
-            'Settings',
-            'Settings',
-            'manage_options',
-            'car-shipping-settings',
-            array($this, 'render_settings_page')
-        );
+				add_menu_page(
+					'Car Shipping Form', /* Page Title */
+					'Car Shipping Form', /* Menu Title */
+					'manage_options', /* Capability */
+					'csf', /* Menu Slug */
+					[$this, 'render_admin_page'], /* Callback */
+					'dashicons-car', /* Icon */
+				);
     }
 
     public function register_settings() {
@@ -595,39 +572,39 @@ class MultistepCarShippingForm {
         );
 
         // Email Settings
-        register_setting('car_shipping_form', 'sales_team_emails', array(
+        register_setting('car_shipping_form_email', 'sales_team_emails', array(
             'type' => 'string',
             'sanitize_callback' => array($this, 'sanitize_email_list'),
             'default' => get_option('admin_email')
         ));
 
-        register_setting('car_shipping_form', 'sales_email_template', array(
+        register_setting('car_shipping_form_email', 'sales_email_template', array(
             'type' => 'string',
             'sanitize_callback' => 'wp_kses_post',
             'default' => $this->get_default_sales_template()
         ));
 
-        register_setting('car_shipping_form', 'customer_email_template', array(
+        register_setting('car_shipping_form_email', 'customer_email_template', array(
             'type' => 'string',
             'sanitize_callback' => 'wp_kses_post',
             'default' => $this->get_default_customer_template()
         ));
 
         // Email Subjects
-        register_setting('car_shipping_form', 'sales_email_subject', array(
+        register_setting('car_shipping_form_email', 'sales_email_subject', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
             'default' => 'New Car Shipping Quote Request'
         ));
 
-        register_setting('car_shipping_form', 'customer_email_subject', array(
+        register_setting('car_shipping_form_email', 'customer_email_subject', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
             'default' => 'Thank you for your car shipping quote request'
         ));
 
         // Cache Settings
-        register_setting('car_shipping_form', 'enable_form_cache', array(
+        register_setting('car_shipping_form_email', 'enable_form_cache', array(
             'type' => 'boolean',
             'default' => true
         ));
@@ -697,7 +674,7 @@ class MultistepCarShippingForm {
     public function add_plugin_action_links($links) {
         $settings_link = sprintf(
             '<a href="%s">%s</a>',
-            admin_url('admin.php?page=car-shipping-settings'),
+            admin_url('admin.php?page=csf'),
             __('Settings', 'car-shipping-form')
         );
         array_unshift($links, $settings_link);
