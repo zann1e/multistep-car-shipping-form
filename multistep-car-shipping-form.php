@@ -688,7 +688,7 @@ class MultistepCarShippingForm {
         return $value;
     }
 
-    private function sanitize_email_list($value) {
+    public function sanitize_email_list($value) {
         $emails = array_map('trim', explode(',', $value));
         $valid_emails = array_filter($emails, 'is_email');
         return implode(', ', $valid_emails);
