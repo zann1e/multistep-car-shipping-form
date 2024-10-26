@@ -640,6 +640,13 @@ class MultistepCarShippingForm {
         require_once $this->plugin_path . 'templates/admin-settings.php';
     }
 
+		public function render_settings_page() {
+				if (!current_user_can('manage_options')) {
+					return;
+				}
+				require_once $this->plugin_path . 'templates/admin-settings.php';
+		}
+
     private function get_default_sales_template() {
         return $this->get_template_content('sales-email-template.php');
     }
